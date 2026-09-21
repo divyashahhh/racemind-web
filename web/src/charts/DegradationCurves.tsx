@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { PlotFrame, linePath, makeScales, useMeasuredWidth } from './primitives';
-import { COMPOUND_COLOR } from '../ui/tokens';
+import { TYRE } from '@/ui/tyres';
 import { degradationDelta } from '../sim/scenario';
 import { DRY_COMPOUNDS, type CircuitModel } from '../sim/types';
 
@@ -82,7 +82,7 @@ export function DegradationCurves({
               .reverse()
               .map((p) => `L${scales.x(p.age).toFixed(2)},${scales.y(p.lo).toFixed(2)}`)
               .join(' ')} Z`}
-            fill={COMPOUND_COLOR[s.compound]}
+            fill={TYRE[s.compound].hex}
             opacity={0.12}
           />
         ))}
@@ -91,7 +91,7 @@ export function DegradationCurves({
             key={`line-${s.compound}`}
             d={linePath(s.points.map((p) => ({ x: scales.x(p.age), y: scales.y(p.mid) })))}
             fill="none"
-            stroke={COMPOUND_COLOR[s.compound]}
+            stroke={TYRE[s.compound].hex}
             strokeWidth={2}
           />
         ))}
@@ -105,7 +105,7 @@ export function DegradationCurves({
               x2={scales.x(s.curve.observedMaxStint)}
               y1={0}
               y2={scales.innerHeight}
-              stroke={COMPOUND_COLOR[s.compound]}
+              stroke={TYRE[s.compound].hex}
               strokeWidth={1}
               strokeDasharray="2 4"
               opacity={0.5}
@@ -116,7 +116,7 @@ export function DegradationCurves({
       <div className="legend" style={{ marginTop: 6 }}>
         {series.map((s) => (
           <div className="item" key={s.compound}>
-            <span className="swatch" style={{ background: COMPOUND_COLOR[s.compound] }} />
+            <span className="swatch" style={{ background: TYRE[s.compound].hex }} />
             <span>{s.compound}</span>
             <span className="faint num">
               {s.curve.sampleLaps.toLocaleString()} laps · max {s.curve.observedMaxStint}

@@ -1,39 +1,39 @@
 {
-  "generatedAt": "2026-09-21T06:05:18.172122+00:00",
+  "generatedAt": "2026-09-21T09:27:02.862026+00:00",
   "races": 25,
-  "stintMae": 8.069,
-  "stopCountAccuracy": 0.5524,
-  "medianPaceMae": 0.9983,
+  "stintMae": 7.666,
+  "stopCountAccuracy": 0.6138,
+  "medianPaceMae": 1.0531,
   "calibration": [
     {
       "bucket": 5,
-      "predicted": 0.5538,
-      "observed": 0.9359,
-      "n": 78
+      "predicted": 0.5552,
+      "observed": 0.99,
+      "n": 100
     },
     {
       "bucket": 6,
-      "predicted": 0.6529,
+      "predicted": 0.6568,
       "observed": 1.0,
-      "n": 74
+      "n": 165
     },
     {
       "bucket": 7,
-      "predicted": 0.7562,
+      "predicted": 0.746,
       "observed": 1.0,
-      "n": 142
+      "n": 180
     },
     {
       "bucket": 8,
-      "predicted": 0.8468,
+      "predicted": 0.8476,
       "observed": 1.0,
-      "n": 211
+      "n": 205
     },
     {
       "bucket": 9,
-      "predicted": 0.9836,
+      "predicted": 0.9844,
       "observed": 1.0,
-      "n": 821
+      "n": 671
     }
   ],
   "perCircuit": [
@@ -52,19 +52,19 @@
     {
       "circuit": "Spielberg",
       "races": 4,
-      "stintMae": 4.364,
+      "stintMae": 4.581,
       "stopAccuracy": 0.5972
     },
     {
       "circuit": "Hungaroring",
       "races": 4,
-      "stintMae": 6.125,
+      "stintMae": 6.232,
       "stopAccuracy": 0.7467
     },
     {
       "circuit": "Monza",
       "races": 4,
-      "stintMae": 11.133,
+      "stintMae": 10.969,
       "stopAccuracy": 0.6622
     },
     {
@@ -82,14 +82,14 @@
     {
       "circuit": "Jeddah",
       "races": 3,
-      "stintMae": 13.571,
+      "stintMae": 9.816,
       "stopAccuracy": 0.9074
     },
     {
       "circuit": "Melbourne",
       "races": 3,
-      "stintMae": 6.214,
-      "stopAccuracy": 0.1591
+      "stintMae": 6.25,
+      "stopAccuracy": 0.4545
     },
     {
       "circuit": "Baku",
@@ -100,50 +100,50 @@
     {
       "circuit": "Montreal",
       "races": 3,
-      "stintMae": 5.917,
-      "stopAccuracy": 0.2667
+      "stintMae": 10.289,
+      "stopAccuracy": 0.3333
     },
     {
       "circuit": "Spa-Francorchamps",
       "races": 3,
-      "stintMae": 8.056,
-      "stopAccuracy": 0.3273
+      "stintMae": 5.043,
+      "stopAccuracy": 0.5636
     },
     {
       "circuit": "Singapore",
       "races": 3,
-      "stintMae": 8.151,
+      "stintMae": 9.035,
       "stopAccuracy": 0.7963
     },
     {
       "circuit": "Lusail",
       "races": 3,
-      "stintMae": 0.0,
-      "stopAccuracy": 0.0
+      "stintMae": 6.454,
+      "stopAccuracy": 0.54
     },
     {
       "circuit": "Austin",
       "races": 3,
-      "stintMae": 4.848,
+      "stintMae": 5.939,
       "stopAccuracy": 0.6
     },
     {
       "circuit": "Mexico City",
       "races": 3,
-      "stintMae": 6.5,
+      "stintMae": 8.86,
       "stopAccuracy": 0.5102
     },
     {
       "circuit": "Las Vegas",
       "races": 3,
-      "stintMae": 5.705,
-      "stopAccuracy": 0.4231
+      "stintMae": 6.0,
+      "stopAccuracy": 0.5385
     },
     {
       "circuit": "Yas Marina Circuit",
       "races": 3,
-      "stintMae": 11.63,
-      "stopAccuracy": 0.4821
+      "stintMae": 5.381,
+      "stopAccuracy": 0.5
     },
     {
       "circuit": "Shanghai",
@@ -154,37 +154,37 @@
     {
       "circuit": "Monte Carlo",
       "races": 3,
-      "stintMae": 26.15,
-      "stopAccuracy": 0.2041
+      "stintMae": 17.0,
+      "stopAccuracy": 0.449
     },
     {
       "circuit": "Zandvoort",
       "races": 3,
-      "stintMae": 9.824,
+      "stintMae": 7.196,
       "stopAccuracy": 0.3208
     },
     {
       "circuit": "Silverstone",
       "races": 2,
-      "stintMae": 4.583,
-      "stopAccuracy": 0.3333
+      "stintMae": 7.614,
+      "stopAccuracy": 0.5278
     },
     {
       "circuit": "Interlagos",
       "races": 2,
-      "stintMae": 5.949,
+      "stintMae": 6.103,
       "stopAccuracy": 0.4194
     },
     {
       "circuit": "Imola",
       "races": 2,
-      "stintMae": 7.722,
+      "stintMae": 7.056,
       "stopAccuracy": 0.4865
     },
     {
       "circuit": "Madring",
       "races": 1,
-      "stintMae": 14.321,
+      "stintMae": 14.179,
       "stopAccuracy": 0.8235
     }
   ],

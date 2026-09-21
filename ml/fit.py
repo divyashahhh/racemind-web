@@ -35,6 +35,13 @@ OUT = Path(__file__).parent / "out"
 RAW = Path(__file__).parent / "raw"
 
 DRY = ["SOFT", "MEDIUM", "HARD"]
+
+# Era weights. 2026 brought new chassis, power-unit and Pirelli tyre regulations, so a
+# 2023 lap says much less about 2027 than a 2026 lap does. Older seasons are kept at low
+# weight rather than discarded: they still inform the *shape* of degradation and the
+# compound ordering, which are the parts the thin 2026 sample struggles to pin down.
+ERA_WEIGHTS = {2023: 0.05, 2024: 0.12, 2025: 0.30, 2026: 1.00}
+DEFAULT_ERA_WEIGHT = 1.00
 REFERENCE_COMPOUND = "MEDIUM"
 # Shrinkage strength: a circuit needs ~this many usable laps per compound before its
 # own fit dominates the pooled prior.
@@ -43,6 +50,10 @@ SHRINK_K = 400.0
 # circuit has very little data.
 BETA_BOUNDS = (0.0, 0.30)
 GAMMA_BOUNDS = (0.0, 0.020)
+
+
+def era_weights(df: pd.DataFrame) -> np.ndarray:
+    return df["year"].map(lambda y: ERA_WEIGHTS.get(int(y), DEFAULT_ERA_WEIGHT)).to_numpy(float)
 
 
 def design_matrix(df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray, list[str]]:
@@ -101,22 +112,30 @@ def design_matrix(df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray, list[str]]:
     X = np.array(np.column_stack(cols), dtype=float, copy=True)
     y = np.array(df["lap_duration"].to_numpy(float), dtype=float, copy=True)
 
-    # Within transformation: demean by driver-race so the group intercept drops out.
-    # Equivalent to a dummy per driver-race, but without building the dummy matrix.
+    # Weighted within transformation: demean by driver-race so the group intercept
+    # drops out, then scale every row by sqrt(weight) so least squares becomes weighted
+    # least squares. The group means are weighted too — demeaning unweighted and then
+    # applying weights would leave a biased intercept behind in each group.
+    w = era_weights(df)
     group = (df["session_key"].astype(str) + "_" + df["driver_number"].astype(str)).to_numpy()
     codes, uniques = pd.factorize(group)
     n_groups = len(uniques)
 
-    counts = np.zeros(n_groups)
-    np.add.at(counts, codes, 1.0)
+    wsum = np.zeros(n_groups)
+    np.add.at(wsum, codes, w)
+    wsum[wsum == 0] = 1.0
 
     x_sums = np.zeros((n_groups, X.shape[1]))
-    np.add.at(x_sums, codes, X)
-    X -= (x_sums / counts[:, None])[codes]
+    np.add.at(x_sums, codes, X * w[:, None])
+    X -= (x_sums / wsum[:, None])[codes]
 
     y_sums = np.zeros(n_groups)
-    np.add.at(y_sums, codes, y)
-    y -= (y_sums / counts)[codes]
+    np.add.at(y_sums, codes, y * w)
+    y -= (y_sums / wsum)[codes]
+
+    root_w = np.sqrt(w)
+    X *= root_w[:, None]
+    y *= root_w
 
     return X, y, names
 
@@ -268,14 +287,21 @@ def main() -> None:
         races = int(group["session_key"].nunique())
         total_laps = int(df[df["circuit"] == circuit]["total_laps"].median())
         # Reference pace: the 10th percentile green-flag lap, which approximates a
-        # low-fuel lap on a fresh nominal tyre.
-        base_lap = float(np.percentile(group["lap_duration"], 10))
+        # low-fuel lap on a fresh nominal tyre. Taken from the most recent season with
+        # data at this circuit — 2026 cars are several seconds off 2023 cars, so pooling
+        # pace across eras would produce a lap time no car has ever actually set.
+        latest_year = int(group["year"].max())
+        recent = group[group["year"] == latest_year]
+        base_lap = float(np.percentile(recent["lap_duration"], 10))
 
         # Shrink in the constrained parameterisation, weighting each component by the
         # laps that actually identify it, then derive the per-compound curves. Because
         # every component is non-negative, the blend is too, so SOFT >= MEDIUM >= HARD
         # holds by construction at every circuit no matter how thin its data is.
-        counts = {c: float(len(group[group["compound"] == c])) for c in DRY}
+        counts = {
+            c: float(era_weights(group[group["compound"] == c]).sum())
+            for c in DRY
+        }
         n_dry = sum(counts.values())
         weights = {
             "b0": n_dry, "g0": n_dry,
@@ -331,6 +357,8 @@ def main() -> None:
             "fuelEffect": round(fuel_effect, 5),
             "curves": curves,
             "racesObserved": races,
+            "paceYear": latest_year,
+            "yearsObserved": sorted(int(y) for y in group["year"].unique()),
         }
 
     # --- Pit and safety car -------------------------------------------------------
@@ -367,6 +395,7 @@ def main() -> None:
         "usableLaps": int(len(usable)),
         "races": int(df["session_key"].nunique()),
         "seasons": sorted(int(y) for y in df["year"].unique()),
+        "eraWeights": {str(k): v for k, v in ERA_WEIGHTS.items()},
         "global": {
             "fuelEffect": round(fuel_effect, 5),
             "pitStopMu": round(pit_mu, 4),

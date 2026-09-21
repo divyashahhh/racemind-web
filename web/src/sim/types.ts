@@ -56,6 +56,17 @@ export interface CircuitModel {
   curves: Partial<Record<Compound, DegradationCurve>>;
   /** How many races the fit is based on. Surfaced in the UI as a confidence cue. */
   racesObserved: number;
+  /**
+   * Set when the curvature was recovered from revealed preference rather than measured
+   * from lap times. Null means the fitted value stood on its own.
+   */
+  gammaCalibration: {
+    observedModalStops: number;
+    support: string;
+    stopsBefore: number;
+    stopsAfter: number;
+    gammaAdded: number;
+  } | null;
 }
 
 export interface SafetyCarModel {
@@ -123,6 +134,12 @@ export interface SimulationSettings {
   enableParameterUncertainty: boolean;
   /** Rain probability 0-1. Above the threshold the sim samples a wet phase. */
   rainProbability: number;
+  /**
+   * Opening-stint traffic, derived from grid slot. A car starting P16 runs its first
+   * laps in dirty air and cannot use the tyre it is on, which is precisely why cars
+   * starting at the back so often take an offset strategy. Decays as the field spreads.
+   */
+  traffic: { perLap: number; decayLaps: number };
 }
 
 export const DEFAULT_SETTINGS: SimulationSettings = {
@@ -131,4 +148,5 @@ export const DEFAULT_SETTINGS: SimulationSettings = {
   enableSafetyCar: true,
   enableParameterUncertainty: true,
   rainProbability: 0,
+  traffic: { perLap: 0, decayLaps: 0 },
 };

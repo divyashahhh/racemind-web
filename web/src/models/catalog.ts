@@ -1,6 +1,15 @@
 import type { CircuitModel, Compound, DegradationCurve } from '../sim/types';
 import raw from './circuits.json';
 
+/** Provenance for a circuit's curvature: measured, or inferred from team behaviour. */
+export interface GammaCalibration {
+  observedModalStops: number;
+  support: string;
+  stopsBefore: number;
+  stopsAfter: number;
+  gammaAdded: number;
+}
+
 /** Shape of the artefact written by ml/fit.py. */
 interface FittedPayload {
   version: number;
@@ -24,6 +33,7 @@ interface RawCircuit {
   noiseSd: number;
   noiseRho: number;
   racesObserved: number;
+  gammaCalibration: GammaCalibration | null;
   safetyCar: CircuitModel['safetyCar'];
   curves: Record<string, Omit<DegradationCurve, 'compound'> & { compound: string }>;
 }
@@ -49,6 +59,7 @@ function toCircuit(entry: RawCircuit): CircuitModel {
     safetyCar: entry.safetyCar,
     curves,
     racesObserved: entry.racesObserved,
+    gammaCalibration: entry.gammaCalibration ?? null,
   };
 }
 

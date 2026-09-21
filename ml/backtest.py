@@ -61,7 +61,11 @@ def plan_time(circuit: dict, pit_laps: list[int], compounds: list[str],
     if tables is None:
         tables = stint_cost_table(circuit)
     n = circuit["raceLaps"]
-    stop_cost = circuit["pitLaneLoss"] + float(np.exp(circuit["pitStopMu"]))
+    # Mean of the log-normal, not the median: the simulator samples the whole
+    # distribution and its fat tail sits well above the median.
+    stop_cost = circuit["pitLaneLoss"] + float(
+        np.exp(circuit["pitStopMu"] + circuit["pitStopSigma"] ** 2 / 2)
+    )
     total = 0.0
     start = 1
     for i, compound in enumerate(compounds):

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { WorkerRequest, WorkerResponse } from './sim.worker';
+import { DEFAULT_SETTINGS } from './types';
 import type { CircuitModel, SimulationSettings, Strategy, StrategyOutcome } from './types';
 
 export interface SimulationState {
@@ -29,7 +30,7 @@ function createWorker(): Worker {
  */
 export function usePlanner(
   circuit: CircuitModel | null,
-  settings: SimulationSettings,
+  settings: SimulationSettings = DEFAULT_SETTINGS,
 ): PlannerState {
   const workerRef = useRef<Worker | null>(null);
   const nextId = useRef(0);
@@ -74,7 +75,14 @@ export function usePlanner(
   // Re-derive the shortlist when the circuit changes.
   useEffect(() => {
     const worker = workerRef.current;
-    if (!worker || !circuit) return;
+    if (!circuit) {
+      // Rounds with no fitted model must not keep showing the previous circuit's call.
+      setStrategiesState([]);
+      setState({ outcomes: null, running: false, elapsedMs: null, error: null });
+      setPlanning(false);
+      return;
+    }
+    if (!worker) return;
     const id = ++nextId.current;
     latestEnumerate.current = id;
     setPlanning(true);

@@ -1,14 +1,17 @@
 # RaceMind
 
-An F1 race-strategy simulator. Pick a circuit, compare pit-stop plans, and see the
-outcome as a **distribution** rather than a single number — because the question a
-strategist actually asks is not "how fast is this plan?" but "how often does it win?".
+**Call the strategy before the pit wall does.**
+
+An F1 strategy predictor for fans. Pick your team, your driver and a 2027 race, set the
+conditions you expect, and get one answer — how many stops, which tyres, and which laps
+to box on — with the real historical evidence sitting next to it so you can check the
+call rather than take it on faith.
 
 ```
 racemind/
-├── web/        the application (Vite + React + TypeScript, no backend)
+├── web/        the app (Vite + React + TypeScript + Tailwind, no backend)
 ├── ml/         the offline modelling pipeline (Python)
-└── RaceMind/   the original Expo prototype, superseded — see "History" below
+└── RaceMind/   the original Expo prototype, superseded — see "History"
 ```
 
 ## Quick start
@@ -19,102 +22,81 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-That is all that is needed. The fitted model ships as static JSON in
-`web/src/models/`, the Monte Carlo runs in a Web Worker in the browser, and the only
-network calls are to OpenF1 for historical race data on the Race tab.
+No backend and no API keys. The fitted model ships as static JSON, the Monte Carlo runs
+in a Web Worker in the browser.
 
 ```bash
-npm run test       # 32 tests: simulation invariants, fitted-model sanity, page smoke tests
-npm run build      # production bundle (~67 KB gzipped)
+npm run test       # 39 tests
+npm run build      # ~110 KB gzipped app + 30 KB data chunk
 ```
 
-## What it does
+## The three pages
 
-**Strategy** — the main screen. A shortlist of genuinely different plans (one-stop,
-two-stop, three-stop), each rendered as a lap-proportional stint bar. Drag a pit stop
-and everything re-simulates as you drag, so you can feel whether a call is robust or
-knife-edge. Below it: the race trace with an uncertainty fan, the outcome
-distributions, a pit-window heatmap, and the undercut window.
+**Predict** — the whole product. Team, driver, race, grid slot, track temperature and
+rain risk go in; one call comes out, with its confidence, its pit windows, and the
+alternatives it beat. Underneath sit four evidence cards and your team's actual record
+at that circuit — real compounds, real stint lengths, real finishing positions.
 
-**Race** — any grand prix from 2023 onward, live from OpenF1: real compounds, real
-stint lengths, real pit-stop counts, pace figures computed only from green-flag laps.
+**Calendar** — all 24 rounds of 2027, including the two the model refuses to predict.
 
-**Model** — the fitted degradation curves with their posterior bands, the coefficient
-table, and the backtest scorecard.
+**Model** — every technical claim, in one place: the lap-time equation, how the fit
+works, how the cliff is recovered, the backtest, and the things it gets wrong.
 
-**Explore** — every circuit compared on degradation, pit loss and safety-car rate.
-
-## How the model works
-
-### Lap time
+## How the prediction works
 
 ```
 t(lap) = base_pace
-       + α_compound + β_compound·age + γ_compound·age²     tyre
-       + φ·(race_laps − lap)                               fuel burn-off
-       + ε                                                 AR(1) noise
+       + α_compound + β·age + γ·age²    tyre
+       + φ·(race_laps − lap)            fuel burn-off
+       + traffic(lap, grid)             dirty air, opening stint only
+       + ε                              AR(1) noise
 ```
 
-Fuel makes the car **faster** as the race runs — it is heaviest on lap 1. Noise is
-autocorrelated, not independent: consecutive laps share traffic, wind and driver
-rhythm, and treating them as independent makes the outcome distribution far too tight.
-
-### Fitting (`ml/`)
-
 Fitted on **66,278 green-flag laps from 84 races across 2023–2026**, after dropping
-in-laps, out-laps, safety-car laps and outliers (29% of all laps are excluded).
+in-laps, out-laps, safety-car laps and outliers (~29% of all laps). A driver-race
+intercept is removed with a within transformation so a slow car on hards is not mistaken
+for a degraded tyre, and circuits are partially pooled so thin tracks borrow strength.
 
-The driver-race intercept is removed with a within transformation, so a slow car on
-hards is not mistaken for a degraded tyre. Circuits are partially pooled toward a
-global fit with an empirical-Bayes weight `n/(n+k)`, letting thinly-observed circuits
-borrow strength instead of producing nonsense.
+Seasons are **era-weighted** — 2026 laps count fully, 2023 laps at 5% — because the 2026
+regulation change means an older lap says much less about 2027.
 
-Two orderings are imposed as non-negativity constraints rather than left to the data
-— see "Honest limitations" for why this is necessary and not cosmetic.
-
-### Simulation
-
-A lap-discretised Monte Carlo, ~1,500 iterations by default, sampling degradation
-coefficients from their posteriors, AR(1) lap noise, log-normal pit-stop durations,
-per-circuit safety-car hazards, and optionally rain.
-
-Every candidate plan is scored against the **same** sampled race (common random
-numbers). That is what makes head-to-head win probabilities usable at only 1,500
-iterations — comparing independently-sampled marginals would need orders of magnitude
-more.
+Prediction is a lap-discretised **Monte Carlo**, 1,500 runs, sampling degradation
+posteriors, AR(1) noise, log-normal pit stops, per-circuit safety-car hazards and rain.
+Every candidate plan is scored against the *same* sampled race, so the confidence figure
+is the share of races a plan actually won — not a comparison of medians.
 
 ## Honest limitations
 
-These are surfaced in the app's Model tab too, not buried here.
+All of these are stated in the app's Model tab too, not just buried here.
 
-**The cliff is not identifiable from race data.** Fitted without constraints, the
-quadratic term comes out *negative* for all three compounds — the model would claim
-tyres stop degrading the longer you run them. The cause is survivorship: teams pit
-*before* the cliff, so the laps observed at high tyre age are exactly the stints that
-were going well. Constraining γ ≥ 0 collapses it to near zero. Identifying a real
-cliff needs practice long-run data, where teams deliberately run a set to destruction.
-**The shipped model is therefore close to linear in tyre age.**
+**The tyre cliff is recovered from behaviour, not measured.** Race lap times cannot
+identify it: teams pit *before* the cliff, so every high-age lap belongs to a stint that
+was going well. Fitted honestly, γ comes out *negative* — the model would claim tyres
+stop degrading with age. So γ is instead set to the smallest value that makes the stop
+count teams actually chose come out optimal (inverse optimisation on revealed
+preference). 11 of 25 circuits needed any adjustment. **This makes the stop-count
+accuracy below partly circular**; stint-length error is the cleaner signal, since stint
+lengths were never targeted.
 
-**The compound ladder is imposed, not discovered.** Tyre age and lap number are
-perfectly collinear *within* a stint, so degradation and fuel separate only through
-across-stint variation. The unconstrained fit loads its misspecification onto whichever
-compound runs the longest stints — the hard — which then appears to degrade faster than
-the soft. Since a softer Pirelli compound is softer *precisely because* it wears faster,
-SOFT ≥ MEDIUM ≥ HARD is encoded as a constraint. The same is done for fresh-tyre pace.
+**The compound ladder is imposed.** Tyre age and lap number are perfectly collinear
+within a stint, so degradation and fuel separate only across stints, and the
+unconstrained fit makes the hard degrade faster than the soft. SOFT ≥ MEDIUM ≥ HARD is
+encoded as a constraint.
 
-**No track position.** The simulator races a stopwatch, not other cars. There is no
-traffic, no dirty air, no overtaking difficulty. The undercut is modelled analytically
-and shown separately rather than being part of the race simulation. This is the single
-largest gap, and it is why the optimiser systematically prefers cleaner plans than real
-pit walls choose.
+**No track position.** The simulator races a stopwatch, not other cars. Grid slot is
+modelled as opening-stint dirty air, but there is no overtaking, no defending and no
+rival reacting to your stop. This is the largest gap.
 
-**Backtest results are mediocre, and reported as such.** 55% stop-count accuracy and
-8.1 laps stint MAE against what teams actually did. Note that teams' own choices are
-not optimal either, so 100% would itself be a red flag — but these numbers are not
-good, and the Model tab shows them rather than hiding them.
+**Rain is priced, not solved.** The rain slider widens the spread of outcomes but does
+not pick intermediates — wet compounds are never fitted or offered. A genuinely wet race
+is outside this model, and the UI says so.
 
-**2023 onward only.** OpenF1 has no data before 2023. The app offers exactly the
-seasons that exist.
+**Two 2027 rounds get no prediction at all.** Portimão and Istanbul return to the
+calendar but have not been raced since 2021, before the data begins. RaceMind shows
+nothing for them rather than dressing up a guess.
+
+**Backtest:** 61% stop-count accuracy, 7.7 laps stint MAE against what teams actually
+did. Teams' own choices are not optimal either, so 100% would itself be a red flag.
 
 ## Rebuilding the model
 
@@ -123,21 +105,35 @@ cd ml
 python3 -m venv .venv && .venv/bin/pip install numpy pandas scipy requests pyarrow
 
 .venv/bin/python ingest.py     # ~20 min, throttled to OpenF1's 3 req/s + 30 req/min
-.venv/bin/python clean.py      # filter to green-flag laps -> out/laps.parquet
-.venv/bin/python fit.py        # constrained hierarchical fit -> out/circuits.json
-.venv/bin/python backtest.py   # score against reality -> out/backtest.json
+.venv/bin/python clean.py      # filter to green-flag laps  -> out/laps.parquet
+.venv/bin/python fit.py        # era-weighted constrained fit -> out/circuits.json
+.venv/bin/python context.py    # 2027 calendar, grid, history -> out/context.json
+.venv/bin/python calibrate.py  # recover the cliff from revealed preference (rewrites circuits.json)
+.venv/bin/python backtest.py   # score against reality       -> out/backtest.json
 .venv/bin/python export.py     # copy artefacts into web/src/models/
 ```
 
-`ingest.py` caches every response to `ml/raw/` and is resumable, so re-running costs
-nothing.
+Order matters: `calibrate.py` needs `context.json` and rewrites `circuits.json` in
+place, so always re-run `fit.py` before it rather than calibrating twice.
+`ingest.py` caches every response to `ml/raw/` and is resumable.
+
+## Design
+
+Dark near-black ground, mint-teal accent, F1 red reserved for live and urgent states,
+oversized tabular numerals. Built with Tailwind v4 + Radix primitives in the
+shadcn/21st.dev idiom, so registry components drop in without adaptation.
 
 ## History
 
-`RaceMind/` holds the original Expo/React Native prototype. It is superseded and is
-kept only for reference. Its data layer never worked: it read `lap.duration` and
-`lap.tyre` from OpenF1's `/laps`, but those fields are called `lap_duration` and do not
-exist respectively, so the degradation and pit-loss inference always returned `null`
-and the analytics table only ever rendered when the API *failed* and mock data took
-over. Its fuel model was also inverted, making the car slower as it burned fuel off.
+`RaceMind/` holds the original Expo/React Native prototype, kept for reference and
+excluded from this repo (it carries its own git history). Its data layer never worked:
+it read `lap.duration` and `lap.tyre` from OpenF1's `/laps`, but those fields are called
+`lap_duration` and do not exist respectively — compounds live on `/stints`. So
+degradation and pit-loss inference always returned `null`, and the analytics table only
+rendered when the API *failed* and mock data took over. Its fuel model was inverted too.
 None of that code carried over.
+
+## Disclaimer
+
+A fan tool, not a betting product. Not affiliated with Formula 1. Race data from
+[OpenF1](https://openf1.org).

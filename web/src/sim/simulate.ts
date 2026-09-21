@@ -20,6 +20,7 @@ export function runStrategy(
   circuit: CircuitModel,
   strategy: Strategy,
   scenario: Scenario,
+  traffic: { perLap: number; decayLaps: number } = { perLap: 0, decayLaps: 0 },
 ): number[] {
   const n = circuit.raceLaps;
   const cumulative = new Array<number>(n + 1);
@@ -48,6 +49,16 @@ export function runStrategy(
       // race runs, which is the opposite of what a naive per-stint model produces.
       circuit.fuelEffect * (n - lap) +
       scenario.noise[lap];
+
+    // Dirty air, paid only while still running the opening stint and only until the
+    // field strings out. Pitting drops the driver into clear air, so a short first
+    // stint escapes the penalty early — which is exactly why cars starting out of
+    // position take an offset strategy. Keying this on lap number alone (as a first
+    // cut did) adds the same constant to every plan and discriminates between none
+    // of them.
+    if (traffic.perLap > 0 && stintIndex === 0 && lap <= traffic.decayLaps) {
+      lapTime += traffic.perLap * (1 - (lap - 1) / traffic.decayLaps);
+    }
 
     if (scenario.wet[lap]) {
       if (stint.compound === 'SOFT' || stint.compound === 'MEDIUM' || stint.compound === 'HARD') {
@@ -103,7 +114,7 @@ export function simulate(
   for (let i = 0; i < iterations; i++) {
     const scenario = sampleScenario(circuit, settings, i);
     for (let s = 0; s < strategies.length; s++) {
-      const cumulative = runStrategy(circuit, strategies[s], scenario);
+      const cumulative = runStrategy(circuit, strategies[s], scenario, settings.traffic);
       totals[s][i] = cumulative[n];
       const store = lapSamples[s];
       for (let lap = 0; lap <= n; lap++) store[lap][i] = cumulative[lap];

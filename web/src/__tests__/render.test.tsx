@@ -1,31 +1,28 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
-import { StrategyPage } from '../pages/StrategyPage';
-import { ModelPage } from '../pages/ModelPage';
-import { ExplorePage } from '../pages/ExplorePage';
-import { RacePage } from '../pages/RacePage';
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import App from '../App';
+import { PredictPage } from '../pages/PredictPage';
+import { CalendarPage } from '../pages/CalendarPage';
+import { ModelPage } from '../pages/ModelPage';
+import { CALENDAR, TEAMS } from '../models/context';
 
 /**
  * Smoke tests: every page must mount and reach a usable state.
  *
- * A clean typecheck and a successful bundle say nothing about whether a page throws
- * on first render — which is exactly the class of failure that made the original
- * prototype's analytics tab show "No Data Found" forever.
+ * A clean typecheck and a successful bundle say nothing about whether a page throws on
+ * first render — which is the class of failure that left the original prototype's
+ * analytics tab showing "No Data Found" forever.
  */
 
-// The worker and network are not available under jsdom, so both are stubbed. The point
-// here is that the components mount and wire up, not that the maths runs again.
-// The worker is unavailable under jsdom, so the planner is stubbed with a real
-// shortlist computed synchronously. That still exercises the board, the compound
-// editor and the stint bars.
+// The worker is unavailable under jsdom, so the planner is stubbed with a real shortlist
+// computed synchronously. That still exercises the board, the call and the evidence.
 vi.mock('../sim/useSimulation', async () => {
   const { enumerateStrategies } = await vi.importActual<typeof import('../sim/optimize')>('../sim/optimize');
   return {
     usePlanner: (circuit: Parameters<typeof enumerateStrategies>[0] | null) => ({
       outcomes: null,
       running: false,
-      planning: false,
+      planning: Boolean(circuit),
       elapsedMs: null,
       error: null,
       strategies: circuit ? enumerateStrategies(circuit) : [],
@@ -34,45 +31,6 @@ vi.mock('../sim/useSimulation', async () => {
   };
 });
 
-vi.mock('../data/openf1', async () => {
-  const actual = await vi.importActual<typeof import('../data/openf1')>('../data/openf1');
-  return {
-    ...actual,
-    getRaces: vi.fn(async () => [
-      {
-        session_key: 1,
-        meeting_key: 1,
-        session_name: 'Race',
-        session_type: 'Race',
-        date_start: '2026-03-08T15:00:00+00:00',
-        date_end: '2026-03-08T17:00:00+00:00',
-        circuit_short_name: 'Sakhir',
-        circuit_key: 63,
-        country_name: 'Bahrain',
-        location: 'Sakhir',
-        year: 2026,
-      },
-    ]),
-    getLaps: vi.fn(async () => [
-      { session_key: 1, driver_number: 1, lap_number: 1, lap_duration: 95.1, duration_sector_1: null, duration_sector_2: null, duration_sector_3: null, is_pit_out_lap: false, st_speed: null },
-      { session_key: 1, driver_number: 1, lap_number: 2, lap_duration: 94.8, duration_sector_1: null, duration_sector_2: null, duration_sector_3: null, is_pit_out_lap: false, st_speed: null },
-    ]),
-    getStints: vi.fn(async () => [
-      { session_key: 1, driver_number: 1, stint_number: 1, lap_start: 1, lap_end: 2, compound: 'MEDIUM', tyre_age_at_start: 0 },
-    ]),
-    getPitStops: vi.fn(async () => []),
-    getDrivers: vi.fn(async () => [
-      { session_key: 1, driver_number: 1, full_name: 'Max Verstappen', name_acronym: 'VER', team_name: 'Red Bull Racing', team_colour: '3671C6', headshot_url: null },
-    ]),
-    getWeather: vi.fn(async () => [
-      { session_key: 1, date: '', air_temperature: 22, track_temperature: 34, humidity: 50, rainfall: 0, wind_speed: 1 },
-    ]),
-    getRaceControl: vi.fn(async () => []),
-  };
-});
-
-// Without vitest `globals`, testing-library does not register its own auto-cleanup,
-// so mounted trees would otherwise pile up and every query would match twice.
 afterEach(cleanup);
 
 beforeEach(() => {
@@ -82,44 +40,104 @@ beforeEach(() => {
     unobserve() {}
     disconnect() {}
   } as unknown as typeof ResizeObserver;
+  // Radix Select measures with pointer APIs jsdom does not implement.
+  Element.prototype.scrollIntoView = () => {};
+  Element.prototype.hasPointerCapture = () => false;
+  Element.prototype.releasePointerCapture = () => {};
 });
 
-describe('pages render', () => {
-  it('mounts the app shell with all four tabs', () => {
+describe('shell', () => {
+  it('mounts with the three tabs of the rebranded IA', () => {
     render(<App />);
-    for (const label of ['Strategy', 'Race', 'Model', 'Explore']) {
-      expect(screen.getByRole('tab', { name: label })).toBeTruthy();
+    expect(screen.getByText('RaceMind')).toBeTruthy();
+    // Scoped to the nav: the footer also links to Model.
+    const nav = within(screen.getByRole('navigation'));
+    for (const label of ['Predict', 'Calendar', 'Model']) {
+      expect(nav.getByRole('button', { name: label }), label).toBeTruthy();
     }
   });
 
-  it('renders the strategy board with a circuit selected', async () => {
-    render(<StrategyPage />);
-    expect(screen.getByText('Strategy board')).toBeTruthy();
-    expect(screen.getByLabelText('Circuit')).toBeTruthy();
-    // The shortlist must actually be populated, not an empty list.
+  it('shows the 2027 season badge', () => {
+    render(<App />);
+    expect(screen.getByText(/2027 season/i)).toBeTruthy();
+  });
+});
+
+describe('predict page', () => {
+  it('renders the input controls a fan needs', () => {
+    render(<PredictPage round={1} onRoundChange={() => {}} />);
+    for (const label of ['Your team', 'Driver', 'Race', 'Grid slot', 'Rain risk', 'Track temperature']) {
+      expect(screen.getByText(label), label).toBeTruthy();
+    }
+  });
+
+  it('shows the call panel while the simulation is pending', () => {
+    render(<PredictPage round={1} onRoundChange={() => {}} />);
+    expect(screen.getByText(/Simulating the race/i)).toBeTruthy();
+  });
+
+  it('surfaces real historical evidence rather than model output', async () => {
+    render(<PredictPage round={1} onRoundChange={() => {}} />);
+    // Round 1 is Sakhir, which has four races of history.
     await waitFor(() => {
-      expect(screen.getAllByText(/-stop/).length).toBeGreaterThan(1);
+      expect(screen.getByText(/What .* actually did at Sakhir/i)).toBeTruthy();
     });
   });
 
-  it('renders the model page with fitted coefficients and a backtest', () => {
+  it('refuses to predict a round with no fitted model, and says why', () => {
+    const portugal = CALENDAR.find((r) => !r.hasModel)!;
+    render(<PredictPage round={portugal.round} onRoundChange={() => {}} />);
+    expect(screen.getByText(new RegExp(`No model for ${portugal.location}`, 'i'))).toBeTruthy();
+    // And it must not show a call anyway.
+    expect(screen.queryByText(/Most likely strategy/i)).toBeNull();
+  });
+});
+
+describe('calendar page', () => {
+  it('lists all 24 rounds of the 2027 season', () => {
+    render(<CalendarPage selected={1} onPick={() => {}} />);
+    expect(CALENDAR).toHaveLength(24);
+    for (const round of CALENDAR.slice(0, 5)) {
+      expect(screen.getByText(round.shortName), round.shortName).toBeTruthy();
+    }
+  });
+
+  it('flags the rounds with no data instead of hiding them', () => {
+    render(<CalendarPage selected={1} onPick={() => {}} />);
+    const missing = CALENDAR.filter((r) => !r.hasModel);
+    expect(missing.length).toBeGreaterThan(0);
+    expect(screen.getAllByText('no data')).toHaveLength(missing.length);
+  });
+});
+
+describe('model page', () => {
+  it('holds the technical material, including the honest limitations', () => {
     render(<ModelPage />);
-    expect(screen.getByText('Fitted model')).toBeTruthy();
-    expect(screen.getByText('Degradation curves')).toBeTruthy();
-    expect(screen.getByText('Backtest')).toBeTruthy();
-    expect(screen.getByText(/Known limitations/)).toBeTruthy();
+    expect(screen.getByText('Under the hood')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Limitations' })).toBeTruthy();
   });
 
-  it('renders the circuit comparison', () => {
-    render(<ExplorePage />);
-    expect(screen.getByText('Circuits')).toBeTruthy();
-    expect(screen.getAllByRole('row').length).toBeGreaterThan(10);
+  it('shows the fitted corpus size', () => {
+    const { container } = render(<ModelPage />);
+    expect(within(container).getByText('Clean laps fitted')).toBeTruthy();
+    expect(within(container).getByText('66,278')).toBeTruthy();
+  });
+});
+
+describe('2027 context', () => {
+  it('has a full grid with team colours and drivers', () => {
+    expect(TEAMS.length).toBeGreaterThanOrEqual(10);
+    for (const team of TEAMS) {
+      expect(team.colour).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(team.drivers.length).toBeGreaterThan(0);
+    }
   });
 
-  it('loads a race and shows real stint data', async () => {
-    render(<RacePage />);
-    await waitFor(() => expect(screen.getByText(/Tyre strategies/)).toBeTruthy());
-    await waitFor(() => expect(screen.getByText('Max Verstappen')).toBeTruthy());
-    expect(screen.getByText('Classification')).toBeTruthy();
+  it('maps every round to either a fitted circuit or an explicit null', () => {
+    for (const round of CALENDAR) {
+      if (round.hasModel) expect(round.circuitKey).toBeTruthy();
+      expect(round.round).toBeGreaterThan(0);
+      expect(round.date).toMatch(/^2027-/);
+    }
   });
 });

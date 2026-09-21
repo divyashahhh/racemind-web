@@ -12,7 +12,7 @@ from pathlib import Path
 OUT = Path(__file__).parent / "out"
 WEB_MODELS = Path(__file__).parent.parent / "web" / "src" / "models"
 
-ARTEFACTS = ("circuits.json", "backtest.json")
+ARTEFACTS = ("circuits.json", "backtest.json", "context.json")
 
 
 def main() -> None:

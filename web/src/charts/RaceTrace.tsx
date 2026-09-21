@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { PlotFrame, areaPath, linePath, makeScales, useMeasuredWidth } from './primitives';
 import { formatDelta } from '../lib/format';
-import { seriesColor } from '../ui/tokens';
+import { seriesColor } from '@/ui/tyres';
 import type { Strategy, StrategyOutcome } from '../sim/types';
 
 export interface TraceSeries {

@@ -3,7 +3,7 @@ import { useMeasuredWidth } from './primitives';
 import { formatDelta } from '../lib/format';
 import type { CircuitModel, Compound, Strategy } from '../sim/types';
 import { deterministicTime } from '../sim/optimize';
-import { COMPOUND_SHORT } from '../ui/tokens';
+import { TYRE } from '@/ui/tyres';
 
 export interface HeatRow {
   compounds: Compound[];
@@ -44,7 +44,7 @@ export function PitWindowHeatmap({
         ];
         cells.push({ lap, time: deterministicTime(circuit, stints) });
       }
-      return { compounds, label: compounds.map((c) => COMPOUND_SHORT[c]).join('–'), cells };
+      return { compounds, label: compounds.map((c) => TYRE[c].letter).join('–'), cells };
     });
     let lo = Infinity;
     let hi = -Infinity;

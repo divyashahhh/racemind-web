@@ -39,4 +39,5 @@ export const TEST_CIRCUIT: CircuitModel = {
     HARD: curve('HARD', 0.45, 0.028, 0.0009),
   },
   racesObserved: 3,
+  gammaCalibration: null,
 };

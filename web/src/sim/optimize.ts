@@ -51,13 +51,26 @@ export function buildCostTable(circuit: CircuitModel): StintCostTable {
  * thousands of times slower than the user will tolerate. So we score everything
  * deterministically, keep the best handful, and spend the simulation budget on those.
  */
+/**
+ * Expected cost of one pit stop.
+ *
+ * Must be the *mean* of the log-normal, not its median. The simulator samples the full
+ * distribution, whose fat right tail puts the mean well above the median (~3.7s versus
+ * ~1.9s of stationary time). Screening on the median silently under-prices every extra
+ * stop, so the deterministic shortlist and the Monte Carlo disagree about which plan is
+ * best — and any calibration done against the screen is tuned to the wrong number.
+ */
+export function expectedStopCost(circuit: CircuitModel): number {
+  return circuit.pitLaneLoss + Math.exp(circuit.pitStopMu + (circuit.pitStopSigma ** 2) / 2);
+}
+
 export function deterministicTime(
   circuit: CircuitModel,
   stints: Stint[],
   table?: StintCostTable,
 ): number {
   const costs = table ?? buildCostTable(circuit);
-  const stopCost = circuit.pitLaneLoss + Math.exp(circuit.pitStopMu);
+  const stopCost = expectedStopCost(circuit);
   let total = 0;
 
   for (let i = 0; i < stints.length; i++) {
@@ -76,7 +89,7 @@ export function deterministicTime(
 
 function directTime(circuit: CircuitModel, stints: Stint[]): number {
   const n = circuit.raceLaps;
-  const stopCost = circuit.pitLaneLoss + Math.exp(circuit.pitStopMu);
+  const stopCost = expectedStopCost(circuit);
   let total = 0;
   for (let i = 0; i < stints.length; i++) {
     const stint = stints[i];
