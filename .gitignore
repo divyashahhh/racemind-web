@@ -1,0 +1,22 @@
+.DS_Store
+.idea/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Expo (legacy prototype)
+RaceMind/.expo/
+
+# Python
+ml/.venv/
+__pycache__/
+
+# Raw OpenF1 cache: ~55MB, fully reproducible via `python ingest.py`
+ml/raw/
+ml/out/*.parquet
+
+# Legacy Expo prototype: superseded by web/, and it carries its own .git history.
+# Excluded rather than flattened into this repo so that history stays intact.
+RaceMind/

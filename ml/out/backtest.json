@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-09-21T06:05:18.172122+00:00",
+  "races": 25,
+  "stintMae": 8.069,
+  "stopCountAccuracy": 0.5524,
+  "medianPaceMae": 0.9983,
+  "calibration": [
+    {
+      "bucket": 5,
+      "predicted": 0.5538,
+      "observed": 0.9359,
+      "n": 78
+    },
+    {
+      "bucket": 6,
+      "predicted": 0.6529,
+      "observed": 1.0,
+      "n": 74
+    },
+    {
+      "bucket": 7,
+      "predicted": 0.7562,
+      "observed": 1.0,
+      "n": 142
+    },
+    {
+      "bucket": 8,
+      "predicted": 0.8468,
+      "observed": 1.0,
+      "n": 211
+    },
+    {
+      "bucket": 9,
+      "predicted": 0.9836,
+      "observed": 1.0,
+      "n": 821
+    }
+  ],
+  "perCircuit": [
+    {
+      "circuit": "Miami",
+      "races": 4,
+      "stintMae": 7.18,
+      "stopAccuracy": 0.8767
+    },
+    {
+      "circuit": "Catalunya",
+      "races": 4,
+      "stintMae": 5.111,
+      "stopAccuracy": 0.6338
+    },
+    {
+      "circuit": "Spielberg",
+      "races": 4,
+      "stintMae": 4.364,
+      "stopAccuracy": 0.5972
+    },
+    {
+      "circuit": "Hungaroring",
+      "races": 4,
+      "stintMae": 6.125,
+      "stopAccuracy": 0.7467
+    },
+    {
+      "circuit": "Monza",
+      "races": 4,
+      "stintMae": 11.133,
+      "stopAccuracy": 0.6622
+    },
+    {
+      "circuit": "Suzuka",
+      "races": 4,
+      "stintMae": 3.882,
+      "stopAccuracy": 0.5278
+    },
+    {
+      "circuit": "Sakhir",
+      "races": 3,
+      "stintMae": 4.939,
+      "stopAccuracy": 0.7857
+    },
+    {
+      "circuit": "Jeddah",
+      "races": 3,
+      "stintMae": 13.571,
+      "stopAccuracy": 0.9074
+    },
+    {
+      "circuit": "Melbourne",
+      "races": 3,
+      "stintMae": 6.214,
+      "stopAccuracy": 0.1591
+    },
+    {
+      "circuit": "Baku",
+      "races": 3,
+      "stintMae": 12.398,
+      "stopAccuracy": 0.8909
+    },
+    {
+      "circuit": "Montreal",
+      "races": 3,
+      "stintMae": 5.917,
+      "stopAccuracy": 0.2667
+    },
+    {
+      "circuit": "Spa-Francorchamps",
+      "races": 3,
+      "stintMae": 8.056,
+      "stopAccuracy": 0.3273
+    },
+    {
+      "circuit": "Singapore",
+      "races": 3,
+      "stintMae": 8.151,
+      "stopAccuracy": 0.7963
+    },
+    {
+      "circuit": "Lusail",
+      "races": 3,
+      "stintMae": 0.0,
+      "stopAccuracy": 0.0
+    },
+    {
+      "circuit": "Austin",
+      "races": 3,
+      "stintMae": 4.848,
+      "stopAccuracy": 0.6
+    },
+    {
+      "circuit": "Mexico City",
+      "races": 3,
+      "stintMae": 6.5,
+      "stopAccuracy": 0.5102
+    },
+    {
+      "circuit": "Las Vegas",
+      "races": 3,
+      "stintMae": 5.705,
+      "stopAccuracy": 0.4231
+    },
+    {
+      "circuit": "Yas Marina Circuit",
+      "races": 3,
+      "stintMae": 11.63,
+      "stopAccuracy": 0.4821
+    },
+    {
+      "circuit": "Shanghai",
+      "races": 3,
+      "stintMae": 9.317,
+      "stopAccuracy": 0.5882
+    },
+    {
+      "circuit": "Monte Carlo",
+      "races": 3,
+      "stintMae": 26.15,
+      "stopAccuracy": 0.2041
+    },
+    {
+      "circuit": "Zandvoort",
+      "races": 3,
+      "stintMae": 9.824,
+      "stopAccuracy": 0.3208
+    },
+    {
+      "circuit": "Silverstone",
+      "races": 2,
+      "stintMae": 4.583,
+      "stopAccuracy": 0.3333
+    },
+    {
+      "circuit": "Interlagos",
+      "races": 2,
+      "stintMae": 5.949,
+      "stopAccuracy": 0.4194
+    },
+    {
+      "circuit": "Imola",
+      "races": 2,
+      "stintMae": 7.722,
+      "stopAccuracy": 0.4865
+    },
+    {
+      "circuit": "Madring",
+      "races": 1,
+      "stintMae": 14.321,
+      "stopAccuracy": 0.8235
+    }
+  ],
+  "notes": [
+    "Scored against the strategies teams actually ran, which are themselves not optimal \u2014 a perfect model would not score 100%.",
+    "Wet races are excluded: the dry degradation model does not apply to them.",
+    "Retirements are excluded, since an abandoned stint plan reveals no intent.",
+    "The optimiser sees no track position, traffic or rival behaviour, so it systematically prefers cleaner plans than real pit walls choose.",
+    "Circuits with one race of data lean almost entirely on the pooled prior; their per-circuit rows are not independent evidence."
+  ]
+}

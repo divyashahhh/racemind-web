@@ -1,0 +1,1394 @@
+{
+  "version": 1,
+  "fittedAt": "2026-09-21T06:04:33.360127+00:00",
+  "usableLaps": 66278,
+  "races": 84,
+  "seasons": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "global": {
+    "fuelEffect": 0.05058,
+    "pitStopMu": 0.661,
+    "pitStopSigma": 1.1334
+  },
+  "circuits": {
+    "Austin": {
+      "key": "Austin",
+      "name": "Austin",
+      "raceLaps": 56,
+      "baseLapTime": 98.858,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.1408,
+          "beta": 0.06262,
+          "gamma": 7.3e-05,
+          "alphaSd": 0.1614,
+          "betaSd": 0.02865,
+          "gammaSd": 0.001211,
+          "sampleLaps": 341,
+          "observedMaxStint": 28
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.05193,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01784,
+          "gammaSd": 0.000829,
+          "sampleLaps": 1088,
+          "observedMaxStint": 32
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.2818,
+          "beta": 0.03983,
+          "gamma": 0.0,
+          "alphaSd": 0.1028,
+          "betaSd": 0.01144,
+          "gammaSd": 0.000622,
+          "sampleLaps": 845,
+          "observedMaxStint": 38
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 23.58,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.185,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.1,
+        "perLapRate": 0.01071,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Baku": {
+      "key": "Baku",
+      "name": "Baku",
+      "raceLaps": 51,
+      "baseLapTime": 105.045,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2609,
+          "beta": 0.03872,
+          "gamma": 0.000135,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 0,
+          "observedMaxStint": 0
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.02863,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01875,
+          "gammaSd": 0.000811,
+          "sampleLaps": 424,
+          "observedMaxStint": 38
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.1436,
+          "beta": 0.02341,
+          "gamma": 0.0,
+          "alphaSd": 0.1213,
+          "betaSd": 0.00927,
+          "gammaSd": 0.000516,
+          "sampleLaps": 1538,
+          "observedMaxStint": 50
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 19.91,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.208,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.3,
+        "perLapRate": 0.01569,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Catalunya": {
+      "key": "Catalunya",
+      "name": "Catalunya",
+      "raceLaps": 66,
+      "baseLapTime": 79.064,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.0601,
+          "beta": 0.07701,
+          "gamma": 3.1e-05,
+          "alphaSd": 0.0996,
+          "betaSd": 0.02538,
+          "gammaSd": 0.001233,
+          "sampleLaps": 1336,
+          "observedMaxStint": 30
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.07469,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.0192,
+          "gammaSd": 0.000953,
+          "sampleLaps": 1426,
+          "observedMaxStint": 34
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.07442,
+          "gamma": 0.0,
+          "alphaSd": 0.0961,
+          "betaSd": 0.01252,
+          "gammaSd": 0.000703,
+          "sampleLaps": 1415,
+          "observedMaxStint": 35
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 21.7,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.238,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.0833,
+        "perLapRate": 0.00505,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Hungaroring": {
+      "key": "Hungaroring",
+      "name": "Hungaroring",
+      "raceLaps": 70,
+      "baseLapTime": 81.631,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.1536,
+          "beta": 0.06539,
+          "gamma": 7.7e-05,
+          "alphaSd": 0.1689,
+          "betaSd": 0.02934,
+          "gammaSd": 0.001191,
+          "sampleLaps": 296,
+          "observedMaxStint": 32
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.05959,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.0137,
+          "gammaSd": 0.000672,
+          "sampleLaps": 1501,
+          "observedMaxStint": 43
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0391,
+          "beta": 0.0592,
+          "gamma": 0.0,
+          "alphaSd": 0.0861,
+          "betaSd": 0.00856,
+          "gammaSd": 0.000522,
+          "sampleLaps": 2628,
+          "observedMaxStint": 53
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 21.11,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.235,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.0833,
+        "perLapRate": 0.00238,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Imola": {
+      "key": "Imola",
+      "name": "Imola",
+      "raceLaps": 63,
+      "baseLapTime": 80.51,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.257,
+          "beta": 0.06085,
+          "gamma": 0.00021,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 6,
+          "observedMaxStint": 6
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.05091,
+          "gamma": 7.7e-05,
+          "alphaSd": 0.07,
+          "betaSd": 0.01922,
+          "gammaSd": 0.000845,
+          "sampleLaps": 695,
+          "observedMaxStint": 36
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0299,
+          "beta": 0.05014,
+          "gamma": 6e-06,
+          "alphaSd": 0.1195,
+          "betaSd": 0.01049,
+          "gammaSd": 0.000551,
+          "sampleLaps": 1177,
+          "observedMaxStint": 52
+        }
+      },
+      "racesObserved": 2,
+      "pitLaneLoss": 29.6,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.15,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.125,
+        "perLapRate": 0.0119,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Interlagos": {
+      "key": "Interlagos",
+      "name": "Interlagos",
+      "raceLaps": 71,
+      "baseLapTime": 74.007,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.1639,
+          "beta": 0.05419,
+          "gamma": 0.00022,
+          "alphaSd": 0.1031,
+          "betaSd": 0.18164,
+          "gammaSd": 0.005242,
+          "sampleLaps": 747,
+          "observedMaxStint": 33
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.05067,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.18123,
+          "gammaSd": 0.005224,
+          "sampleLaps": 1100,
+          "observedMaxStint": 50
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.04909,
+          "gamma": 0.0,
+          "alphaSd": 0.0391,
+          "betaSd": 0.00524,
+          "gammaSd": 0.000426,
+          "sampleLaps": 35,
+          "observedMaxStint": 27
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 20.41,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.439,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.5,
+        "perLapRate": 0.01972,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Jeddah": {
+      "key": "Jeddah",
+      "name": "Jeddah",
+      "raceLaps": 50,
+      "baseLapTime": 92.76,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2466,
+          "beta": 0.02852,
+          "gamma": 0.000338,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 77,
+          "observedMaxStint": 15
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.02006,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.017,
+          "gammaSd": 0.00076,
+          "sampleLaps": 694,
+          "observedMaxStint": 39
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.01934,
+          "gamma": 0.0,
+          "alphaSd": 0.105,
+          "betaSd": 0.01023,
+          "gammaSd": 0.00054,
+          "sampleLaps": 1468,
+          "observedMaxStint": 47
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 20.14,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.162,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.3,
+        "perLapRate": 0.016,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Las Vegas": {
+      "key": "Las Vegas",
+      "name": "Las Vegas",
+      "raceLaps": 50,
+      "baseLapTime": 95.313,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2583,
+          "beta": 0.06339,
+          "gamma": 0.000274,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 4,
+          "observedMaxStint": 2
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.05336,
+          "gamma": 0.000141,
+          "alphaSd": 0.07,
+          "betaSd": 0.02782,
+          "gammaSd": 0.001422,
+          "sampleLaps": 438,
+          "observedMaxStint": 25
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.1135,
+          "beta": 0.03929,
+          "gamma": 0.000141,
+          "alphaSd": 0.1383,
+          "betaSd": 0.01127,
+          "gammaSd": 0.000615,
+          "sampleLaps": 1365,
+          "observedMaxStint": 46
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 20.68,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.217,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.5,
+        "perLapRate": 0.024,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Lusail": {
+      "key": "Lusail",
+      "name": "Lusail",
+      "raceLaps": 57,
+      "baseLapTime": 84.56,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2206,
+          "beta": 0.04717,
+          "gamma": 0.000114,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 73,
+          "observedMaxStint": 23
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.01996,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01973,
+          "gammaSd": 0.000911,
+          "sampleLaps": 1253,
+          "observedMaxStint": 34
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.01947,
+          "gamma": 0.0,
+          "alphaSd": 0.1054,
+          "betaSd": 0.01318,
+          "gammaSd": 0.000686,
+          "sampleLaps": 679,
+          "observedMaxStint": 45
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 22.7,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.219,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.5,
+        "perLapRate": 0.02105,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Madring": {
+      "key": "Madring",
+      "name": "Madring",
+      "raceLaps": 57,
+      "baseLapTime": 97.451,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2314,
+          "beta": 0.03661,
+          "gamma": 0.000337,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 51,
+          "observedMaxStint": 21
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.02766,
+          "gamma": 0.000217,
+          "alphaSd": 0.07,
+          "betaSd": 0.00635,
+          "gammaSd": 0.000453,
+          "sampleLaps": 100,
+          "observedMaxStint": 18
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.01109,
+          "gamma": 0.000217,
+          "alphaSd": 0.4881,
+          "betaSd": 0.01979,
+          "gammaSd": 0.00074,
+          "sampleLaps": 632,
+          "observedMaxStint": 53
+        }
+      },
+      "racesObserved": 1,
+      "pitLaneLoss": 30.71,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.255,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.1667,
+        "perLapRate": 0.00585,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Melbourne": {
+      "key": "Melbourne",
+      "name": "Melbourne",
+      "raceLaps": 58,
+      "baseLapTime": 81.354,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.3133,
+          "beta": 0.04093,
+          "gamma": 0.000711,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 103,
+          "observedMaxStint": 23
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.03291,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.02687,
+          "gammaSd": 0.001099,
+          "sampleLaps": 303,
+          "observedMaxStint": 36
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.2037,
+          "beta": 0.02205,
+          "gamma": 0.0,
+          "alphaSd": 0.162,
+          "betaSd": 0.01056,
+          "gammaSd": 0.000537,
+          "sampleLaps": 1547,
+          "observedMaxStint": 51
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 13.6,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.364,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.4167,
+        "perLapRate": 0.02874,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Mexico City": {
+      "key": "Mexico City",
+      "name": "Mexico City",
+      "raceLaps": 71,
+      "baseLapTime": 81.12,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.3268,
+          "beta": 0.04639,
+          "gamma": 0.000551,
+          "alphaSd": 0.1379,
+          "betaSd": 0.02379,
+          "gammaSd": 0.000942,
+          "sampleLaps": 567,
+          "observedMaxStint": 36
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.04222,
+          "gamma": 0.000167,
+          "alphaSd": 0.07,
+          "betaSd": 0.01669,
+          "gammaSd": 0.000715,
+          "sampleLaps": 1168,
+          "observedMaxStint": 41
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.1737,
+          "beta": 0.0331,
+          "gamma": 3e-06,
+          "alphaSd": 0.1196,
+          "betaSd": 0.01043,
+          "gammaSd": 0.000546,
+          "sampleLaps": 1061,
+          "observedMaxStint": 48
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 22.01,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.166,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.3,
+        "perLapRate": 0.01408,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Miami": {
+      "key": "Miami",
+      "name": "Miami",
+      "raceLaps": 57,
+      "baseLapTime": 91.293,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2605,
+          "beta": 0.03747,
+          "gamma": 0.000117,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 66,
+          "observedMaxStint": 27
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.02881,
+          "gamma": 1e-06,
+          "alphaSd": 0.07,
+          "betaSd": 0.01264,
+          "gammaSd": 0.000596,
+          "sampleLaps": 925,
+          "observedMaxStint": 56
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0172,
+          "beta": 0.0282,
+          "gamma": 0.0,
+          "alphaSd": 0.0886,
+          "betaSd": 0.00855,
+          "gammaSd": 0.000498,
+          "sampleLaps": 1658,
+          "observedMaxStint": 52
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 21.94,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.172,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.25,
+        "perLapRate": 0.02047,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Monte Carlo": {
+      "key": "Monte Carlo",
+      "name": "Monte Carlo",
+      "raceLaps": 78,
+      "baseLapTime": 76.012,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2567,
+          "beta": 0.01987,
+          "gamma": 0.000438,
+          "alphaSd": 0.2732,
+          "betaSd": 0.03046,
+          "gammaSd": 0.000893,
+          "sampleLaps": 242,
+          "observedMaxStint": 53
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.01358,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01487,
+          "gammaSd": 0.00056,
+          "sampleLaps": 1497,
+          "observedMaxStint": 76
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0501,
+          "beta": 0.01074,
+          "gamma": 0.0,
+          "alphaSd": 0.146,
+          "betaSd": 0.00974,
+          "gammaSd": 0.000481,
+          "sampleLaps": 2112,
+          "observedMaxStint": 77
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 19.8,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.229,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.25,
+        "perLapRate": 0.00855,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Montreal": {
+      "key": "Montreal",
+      "name": "Montreal",
+      "raceLaps": 70,
+      "baseLapTime": 75.642,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.4346,
+          "beta": 0.01779,
+          "gamma": 0.000802,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 131,
+          "observedMaxStint": 36
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.00558,
+          "gamma": 0.0007,
+          "alphaSd": 0.07,
+          "betaSd": 0.02772,
+          "gammaSd": 0.001034,
+          "sampleLaps": 680,
+          "observedMaxStint": 47
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.00488,
+          "gamma": 0.0007,
+          "alphaSd": 0.1942,
+          "betaSd": 0.01514,
+          "gammaSd": 0.000619,
+          "sampleLaps": 1476,
+          "observedMaxStint": 66
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 18.2,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.527,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.0833,
+        "perLapRate": 0.01429,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Monza": {
+      "key": "Monza",
+      "name": "Monza",
+      "raceLaps": 53,
+      "baseLapTime": 83.066,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2229,
+          "beta": 0.0393,
+          "gamma": 0.000605,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 68,
+          "observedMaxStint": 22
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.03068,
+          "gamma": 2.8e-05,
+          "alphaSd": 0.07,
+          "betaSd": 0.01301,
+          "gammaSd": 0.000611,
+          "sampleLaps": 1235,
+          "observedMaxStint": 48
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.03018,
+          "gamma": 0.0,
+          "alphaSd": 0.0867,
+          "betaSd": 0.00862,
+          "gammaSd": 0.000504,
+          "sampleLaps": 1925,
+          "observedMaxStint": 49
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 23.91,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.209,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.0833,
+        "perLapRate": 0.00629,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Sakhir": {
+      "key": "Sakhir",
+      "name": "Sakhir",
+      "raceLaps": 57,
+      "baseLapTime": 95.963,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.0963,
+          "beta": 0.10297,
+          "gamma": 0.000593,
+          "alphaSd": 0.1314,
+          "betaSd": 0.03233,
+          "gammaSd": 0.001578,
+          "sampleLaps": 684,
+          "observedMaxStint": 26
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.09381,
+          "gamma": 0.000503,
+          "alphaSd": 0.07,
+          "betaSd": 0.02283,
+          "gammaSd": 0.001175,
+          "sampleLaps": 410,
+          "observedMaxStint": 29
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0062,
+          "beta": 0.09325,
+          "gamma": 0.000503,
+          "alphaSd": 0.1134,
+          "betaSd": 0.01241,
+          "gammaSd": 0.000747,
+          "sampleLaps": 1352,
+          "observedMaxStint": 28
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 24.05,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.176,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.1,
+        "perLapRate": 0.01053,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Shanghai": {
+      "key": "Shanghai",
+      "name": "Shanghai",
+      "raceLaps": 56,
+      "baseLapTime": 96.496,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2298,
+          "beta": 0.0479,
+          "gamma": 0.001032,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 54,
+          "observedMaxStint": 16
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.03901,
+          "gamma": 0.000913,
+          "alphaSd": 0.07,
+          "betaSd": 0.02344,
+          "gammaSd": 0.001191,
+          "sampleLaps": 493,
+          "observedMaxStint": 28
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.03803,
+          "gamma": 0.0,
+          "alphaSd": 0.1248,
+          "betaSd": 0.01094,
+          "gammaSd": 0.000558,
+          "sampleLaps": 1329,
+          "observedMaxStint": 44
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 22.2,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.282,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.1,
+        "perLapRate": 0.01786,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Silverstone": {
+      "key": "Silverstone",
+      "name": "Silverstone",
+      "raceLaps": 52,
+      "baseLapTime": 91.407,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.3251,
+          "beta": 0.01878,
+          "gamma": 0.001651,
+          "alphaSd": 0.2658,
+          "betaSd": 0.06591,
+          "gammaSd": 0.002752,
+          "sampleLaps": 355,
+          "observedMaxStint": 29
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.00589,
+          "gamma": 0.001579,
+          "alphaSd": 0.07,
+          "betaSd": 0.04937,
+          "gammaSd": 0.002057,
+          "sampleLaps": 1220,
+          "observedMaxStint": 33
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.00546,
+          "gamma": 0.001579,
+          "alphaSd": 0.2273,
+          "betaSd": 0.03373,
+          "gammaSd": 0.001491,
+          "sampleLaps": 429,
+          "observedMaxStint": 32
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 28.3,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.425,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.25,
+        "perLapRate": 0.02564,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Singapore": {
+      "key": "Singapore",
+      "name": "Singapore",
+      "raceLaps": 62,
+      "baseLapTime": 96.482,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2455,
+          "beta": 0.04476,
+          "gamma": 0.00034,
+          "alphaSd": 0.1923,
+          "betaSd": 0.03173,
+          "gammaSd": 0.001231,
+          "sampleLaps": 248,
+          "observedMaxStint": 36
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.03853,
+          "gamma": 0.000257,
+          "alphaSd": 0.07,
+          "betaSd": 0.01814,
+          "gammaSd": 0.000755,
+          "sampleLaps": 1066,
+          "observedMaxStint": 48
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.1687,
+          "beta": 0.03804,
+          "gamma": 0.000257,
+          "alphaSd": 0.1232,
+          "betaSd": 0.01188,
+          "gammaSd": 0.000591,
+          "sampleLaps": 1270,
+          "observedMaxStint": 47
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 23.81,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.189,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.1,
+        "perLapRate": 0.00968,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Spa-Francorchamps": {
+      "key": "Spa-Francorchamps",
+      "name": "Spa-Francorchamps",
+      "raceLaps": 44,
+      "baseLapTime": 107.089,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.6295,
+          "beta": 0.08924,
+          "gamma": 7.8e-05,
+          "alphaSd": 0.2144,
+          "betaSd": 0.05015,
+          "gammaSd": 0.002332,
+          "sampleLaps": 293,
+          "observedMaxStint": 25
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.04352,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.03053,
+          "gammaSd": 0.001291,
+          "sampleLaps": 1156,
+          "observedMaxStint": 36
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.03959,
+          "gamma": 0.0,
+          "alphaSd": 0.1594,
+          "betaSd": 0.02088,
+          "gammaSd": 0.000963,
+          "sampleLaps": 888,
+          "observedMaxStint": 32
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 22.6,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.318,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.25,
+        "perLapRate": 0.00758,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Spielberg": {
+      "key": "Spielberg",
+      "name": "Spielberg",
+      "raceLaps": 71,
+      "baseLapTime": 69.667,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2025,
+          "beta": 0.07413,
+          "gamma": 9.9e-05,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 143,
+          "observedMaxStint": 23
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.0667,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01395,
+          "gammaSd": 0.000747,
+          "sampleLaps": 1862,
+          "observedMaxStint": 31
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0647,
+          "beta": 0.06051,
+          "gamma": 0.0,
+          "alphaSd": 0.0727,
+          "betaSd": 0.00923,
+          "gammaSd": 0.000572,
+          "sampleLaps": 2027,
+          "observedMaxStint": 39
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 16.7,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.176,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.4167,
+        "perLapRate": 0.01174,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Suzuka": {
+      "key": "Suzuka",
+      "name": "Suzuka",
+      "raceLaps": 53,
+      "baseLapTime": 92.426,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.207,
+          "beta": 0.06836,
+          "gamma": 0.000467,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 108,
+          "observedMaxStint": 18
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.06042,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01803,
+          "gammaSd": 0.000908,
+          "sampleLaps": 1153,
+          "observedMaxStint": 31
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.05991,
+          "gamma": 0.0,
+          "alphaSd": 0.0956,
+          "betaSd": 0.01122,
+          "gammaSd": 0.000628,
+          "sampleLaps": 1733,
+          "observedMaxStint": 36
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 22.9,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.291,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.25,
+        "perLapRate": 0.01258,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Yas Marina Circuit": {
+      "key": "Yas Marina Circuit",
+      "name": "Yas Marina Circuit",
+      "raceLaps": 58,
+      "baseLapTime": 88.28,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.2519,
+          "beta": 0.08184,
+          "gamma": 0.000308,
+          "alphaSd": 0.0531,
+          "betaSd": 0.00896,
+          "gammaSd": 0.000542,
+          "sampleLaps": 28,
+          "observedMaxStint": 23
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.07241,
+          "gamma": 0.0,
+          "alphaSd": 0.07,
+          "betaSd": 0.01737,
+          "gammaSd": 0.000905,
+          "sampleLaps": 747,
+          "observedMaxStint": 27
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.2718,
+          "beta": 0.0495,
+          "gamma": 0.0,
+          "alphaSd": 0.0954,
+          "betaSd": 0.00764,
+          "gammaSd": 0.000496,
+          "sampleLaps": 2000,
+          "observedMaxStint": 43
+        }
+      },
+      "racesObserved": 3,
+      "pitLaneLoss": 21.2,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.15,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.3,
+        "perLapRate": 0.0069,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    },
+    "Zandvoort": {
+      "key": "Zandvoort",
+      "name": "Zandvoort",
+      "raceLaps": 72,
+      "baseLapTime": 74.946,
+      "fuelEffect": 0.05058,
+      "curves": {
+        "SOFT": {
+          "compound": "SOFT",
+          "alpha": -0.5449,
+          "beta": 0.01453,
+          "gamma": 0.000389,
+          "alphaSd": 0.1546,
+          "betaSd": 0.03136,
+          "gammaSd": 0.001281,
+          "sampleLaps": 996,
+          "observedMaxStint": 48
+        },
+        "MEDIUM": {
+          "compound": "MEDIUM",
+          "alpha": 0.0,
+          "beta": 0.01164,
+          "gamma": 0.000351,
+          "alphaSd": 0.07,
+          "betaSd": 0.02313,
+          "gammaSd": 0.001007,
+          "sampleLaps": 985,
+          "observedMaxStint": 31
+        },
+        "HARD": {
+          "compound": "HARD",
+          "alpha": 0.0,
+          "beta": 0.00327,
+          "gamma": 0.000351,
+          "alphaSd": 0.1431,
+          "betaSd": 0.0114,
+          "gammaSd": 0.000568,
+          "sampleLaps": 1634,
+          "observedMaxStint": 55
+        }
+      },
+      "racesObserved": 4,
+      "pitLaneLoss": 17.41,
+      "pitStopMu": 0.661,
+      "pitStopSigma": 1.1334,
+      "noiseSd": 0.192,
+      "noiseRho": 0.55,
+      "safetyCar": {
+        "lapOneRate": 0.0833,
+        "perLapRate": 0.0162,
+        "meanDuration": 4.0,
+        "pitLossDiscount": 0.45,
+        "lapTimeMultiplier": 1.4
+      }
+    }
+  }
+}
