@@ -17,6 +17,8 @@ __pycache__/
 ml/raw/
 ml/out/*.parquet
 
-# Legacy Expo prototype: superseded by web/, and it carries its own .git history.
-# Excluded rather than flattened into this repo so that history stays intact.
+# The legacy Expo prototype used to live here as a nested git repo, which made the
+# editor show two unrelated repositories side by side. It now sits outside this
+# project at ../RaceMind-legacy with its own history intact. Kept ignored in case a
+# stray copy reappears.
 RaceMind/

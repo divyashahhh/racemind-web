@@ -10,8 +10,7 @@ call rather than take it on faith.
 ```
 racemind/
 ├── web/        the app (Vite + React + TypeScript + Tailwind, no backend)
-├── ml/         the offline modelling pipeline (Python)
-└── RaceMind/   the original Expo prototype, superseded — see "History"
+└── ml/         the offline modelling pipeline (Python)
 ```
 
 ## Quick start
@@ -125,8 +124,11 @@ shadcn/21st.dev idiom, so registry components drop in without adaptation.
 
 ## History
 
-`RaceMind/` holds the original Expo/React Native prototype, kept for reference and
-excluded from this repo (it carries its own git history). Its data layer never worked:
+The original Expo/React Native prototype lives at `../RaceMind-legacy`, outside this
+project, with its own git history and its own GitHub repo
+([divyashahhh/RACEMIND](https://github.com/divyashahhh/RACEMIND)). It used to sit inside
+this folder as a nested repository, which made editors show two unrelated repos side by
+side, so it was moved out rather than flattened in. Its data layer never worked:
 it read `lap.duration` and `lap.tyre` from OpenF1's `/laps`, but those fields are called
 `lap_duration` and do not exist respectively — compounds live on `/stints`. So
 degradation and pit-loss inference always returned `null`, and the analytics table only
